@@ -1,0 +1,12 @@
+{
+  "name": "@knives/app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "pinia": "^2.2.2",
+    "vue": "^3.4.26",
+    "vuetify": "^3.6.8"
+  }
+}

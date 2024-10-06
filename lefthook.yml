@@ -1,0 +1,17 @@
+# Refer for explanation to following link:
+# https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
+
+pre-commit:
+  parallel: true
+  commands:
+    eslint:
+      glob: '*.{ts,vue}'
+      run: pnpm eslint {staged_files}
+    style:
+      glob: '*.{css,scss,vue}'
+      run: pnpm stylelint {staged_files}
+
+commit-msg:
+  commands:
+    check:
+      run: npx commitlint --edit
