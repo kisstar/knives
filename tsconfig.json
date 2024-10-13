@@ -20,7 +20,8 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
-      "@app/*": ["./packages/app/*"]
+      "@app/*": ["./packages/app/*"],
+      "@cube2png/*": ["./packages/modules/cube2png/*"]
     }
   },
   "include": ["packages"]
