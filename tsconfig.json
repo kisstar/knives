@@ -21,12 +21,14 @@
 
     "paths": {
       "@app/*": ["./packages/app/*"],
+      "@shared/*": ["./packages/shared/*"],
       "@cubeParser/*": ["./packages/lib/cube-parser/*"],
       "@cube2png/*": ["./packages/modules/cube2png/*"]
     }
   },
   "include": [
     "packages/app",
+    "packages/shared",
     "packages/lib/cube-parser",
     "packages/modules/cube2png"
   ]

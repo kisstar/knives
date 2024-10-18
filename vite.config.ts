@@ -7,6 +7,7 @@ const dirMap = {
   '@app': './packages/app',
   '@cube2png': './packages/modules/cube2png',
   '@cubeParser': './packages/lib/cube-parser',
+  '@shared': './packages/shared',
 };
 const dirAlias = Object.keys(dirMap).reduce((acc, key) => {
   acc[key] = fileURLToPath(new URL(`${dirMap[key]}`, import.meta.url));
