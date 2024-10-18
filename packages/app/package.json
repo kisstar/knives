@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "dependencies": {
+    "@knives/cube2png": "workspace:^",
     "lodash-es": "^4.17.21",
     "pinia": "^2.2.2",
     "vue": "^3.4.26",

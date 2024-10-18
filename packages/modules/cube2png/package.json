@@ -2,5 +2,12 @@
   "name": "@knives/cube2png",
   "private": true,
   "version": "0.0.0",
-  "type": "module"
+  "type": "module",
+  "main": "./main.ts",
+  "module": "./main.ts",
+  "dependencies": {
+    "@knives/cube-parser": "workspace:^",
+    "vue": "^3.4.26",
+    "vuetify": "^3.6.8"
+  }
 }

@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import vuetify from '@app/plugins/vuetify';
 import { router } from '@app/router';
-import '@cube2png/main';
+import '@knives/cube2png';
 import App from '@app/App.vue';
 import '@app/styles/index.scss';
 
