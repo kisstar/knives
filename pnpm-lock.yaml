@@ -114,6 +114,10 @@ importers:
         specifier: ^3.6.8
         version: 3.6.8(typescript@5.4.5)(vite-plugin-vuetify@2.0.3)(vue@3.4.26)
 
+  packages/lib/cube-parser: {}
+
+  packages/modules/cube2png: {}
+
 packages:
 
   /@alloc/quick-lru@5.2.0:

@@ -21,8 +21,13 @@
 
     "paths": {
       "@app/*": ["./packages/app/*"],
+      "@cubeParser/*": ["./packages/lib/cube-parser/*"],
       "@cube2png/*": ["./packages/modules/cube2png/*"]
     }
   },
-  "include": ["packages"]
+  "include": [
+    "packages/app",
+    "packages/lib/cube-parser",
+    "packages/modules/cube2png"
+  ]
 }
