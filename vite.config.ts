@@ -20,9 +20,20 @@ const dirAlias = Object.keys(dirMap).reduce((acc, key) => {
 export default defineConfig(() => {
   return {
     root: dirAlias['@app'],
+    base: '/knives',
     resolve: {
       alias: dirAlias,
     },
-    plugins: [vue(), vuetify()],
+    plugins: [
+      vue(),
+      vuetify({
+        styles: {
+          configFile: 'styles/settings.scss',
+        },
+      }),
+    ],
+    build: {
+      outDir: '../../dist',
+    },
   };
 });
