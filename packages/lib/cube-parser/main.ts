@@ -1,6 +1,6 @@
 import { parse } from '@cubeParser/parse';
 
-interface CubeInfo {
+export interface CubeInfo {
   title: string;
   type: string;
   size: number;
@@ -18,6 +18,8 @@ export default class CubeParser {
 
   parse() {
     this.cube = parse(this.content);
+
+    return this.cube;
   }
 
   /**
