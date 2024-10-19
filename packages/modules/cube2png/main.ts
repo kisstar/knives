@@ -1,11 +1,11 @@
-import { APP_NAME } from '@app/constants';
-import { router } from '@app/egress';
+import { APP_NAME, AppMenu, router } from '@app/egress';
 
-const render = () => {
+const register = () => {
   router.addRoute('tools', {
     path: 'cube2png',
     name: 'cube2png',
     components: {
+      headerBar: () => AppMenu,
       content: () => import('@cube2png/C2PContent.vue'),
     },
     meta: {
@@ -14,4 +14,4 @@ const render = () => {
   });
 };
 
-render();
+register();

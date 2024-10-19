@@ -1,0 +1,52 @@
+<template>
+  <div
+    class="flex justify-between w-full h-full px-6 border-b border-slate-900/10 dark:border-slate-50/[0.06]"
+  >
+    <!-- 左侧 -->
+    <div class="flex items-center">
+      <a class="flex items-center" href="/">
+        <img
+          class="mr-3"
+          width="28"
+          height="28"
+          src="/knives.svg"
+          alt="Knives"
+        />
+        Knives
+      </a>
+    </div>
+    <!-- 右侧 -->
+    <div class="flex items-center ml-6 pl-6">
+      <button
+        class="text-slate-400 hover:text-slate-500 dark:hover:text-slate-300"
+        type="button"
+        @click="toggleTheme"
+      >
+        <v-icon icon="mdi-theme-light-dark"></v-icon>
+      </button>
+      <a
+        href="https://github.com/kisstar/knives"
+        target="_blank"
+        class="ml-6 block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300"
+      >
+        <v-icon icon="mdi-github"></v-icon>
+      </a>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { useAppConfigStore } from '@app/store';
+
+const appConfigStore = useAppConfigStore();
+
+function toggleTheme() {
+  const theme = appConfigStore.theme;
+
+  if (theme === 'light') {
+    appConfigStore.setTheme('dark');
+  } else {
+    appConfigStore.setTheme('light');
+  }
+}
+</script>
