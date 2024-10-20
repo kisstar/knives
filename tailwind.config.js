@@ -2,6 +2,7 @@
 export default {
   content: ['./index.html', './packages/**/*.{vue,js,ts,jsx,tsx}'],
   // darkMode: ['variant', '&:not(.light *)'],
+  darkMode: 'selector',
   theme: {
     extend: {},
   },
