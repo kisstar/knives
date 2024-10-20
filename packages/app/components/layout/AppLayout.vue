@@ -3,19 +3,19 @@
     <v-system-bar v-if="showSystemBar">
       <router-view :name="ROUTER_VIEW.SYSTEM_BAR"></router-view>
     </v-system-bar>
-    <v-app-bar v-if="showHeaderBar" height="54" flat>
+    <v-app-bar v-if="showHeaderBar" height="60" flat>
       <router-view :name="ROUTER_VIEW.HEADER_BAR"></router-view>
     </v-app-bar>
-    <v-navigation-drawer v-if="showAsideNav" width="66" permanent>
+    <v-navigation-drawer v-if="showAsideNav" width="80" permanent>
       <router-view :name="ROUTER_VIEW.ASIDE_NAV"></router-view>
     </v-navigation-drawer>
-    <v-navigation-drawer v-if="showLeftContent" width="278" permanent>
+    <v-navigation-drawer v-if="showLeftContent" width="200" permanent>
       <router-view :name="ROUTER_VIEW.LEFT_CONTENT"></router-view>
     </v-navigation-drawer>
     <v-navigation-drawer
       v-if="showRightContent"
       location="right"
-      width="260"
+      width="272"
       permanent
     >
       <router-view :name="ROUTER_VIEW.RIGHT_CONTENT"></router-view>
