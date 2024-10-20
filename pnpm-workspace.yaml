@@ -1,4 +1,5 @@
 packages:
   - 'packages/app'
+  - 'packages/shared'
   - 'packages/lib/*'
   - 'packages/modules/*'

@@ -1,12 +1,15 @@
 <template>
-  <div class="pl-4 pt-4 w-6/12">
-    <v-file-input
-      accept=".cube"
-      label="Select a CUBE file"
-      prepend-icon="mdi-file"
-      @change="handleChange"
-    >
-    </v-file-input>
+  <div class="flex justify-between items-center px-4 pt-4">
+    <div class="w-6/12">
+      <v-file-input
+        accept=".cube"
+        label="Select a CUBE file"
+        prepend-icon="mdi-file"
+        @change="handleChange"
+      >
+      </v-file-input>
+    </div>
+    <v-btn :disabled="!cubeInfo" @click="handleExport"> 导出 LUT </v-btn>
   </div>
 
   <div class="flex px-14">
@@ -21,6 +24,7 @@
 import { computed, ref, useTemplateRef } from 'vue';
 import CubeParser, { type CubeInfo } from '@knives/cube-parser';
 import { readFileAsText, getImageData } from '@cube2png/utils';
+import { downloadBlob } from '@knives/shared';
 
 const canvasRef = useTemplateRef<HTMLCanvasElement>('canvasRef');
 const cubeInfo = ref<CubeInfo | null>(null);
@@ -38,7 +42,7 @@ const items = computed<Record<string, string>[]>(() => {
     });
 });
 
-const handleChange = async (e: InputEvent) => {
+async function handleChange(e: InputEvent) {
   if (!e.target) return;
 
   const files = (e.target as HTMLInputElement).files;
@@ -62,5 +66,15 @@ const handleChange = async (e: InputEvent) => {
   if (!ctx) throw new Error('Canvas context not found');
 
   ctx.putImageData(imageData, 0, 0);
-};
+}
+
+function handleExport() {
+  if (!canvasRef.value) throw new Error('Canvas element not found');
+
+  canvasRef.value.toBlob(function (blob) {
+    if (!blob) return;
+
+    downloadBlob(blob, { filename: 'cube.png' });
+  });
+}
 </script>

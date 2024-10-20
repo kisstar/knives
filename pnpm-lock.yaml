@@ -134,12 +134,17 @@ importers:
       '@knives/cube-parser':
         specifier: workspace:^
         version: link:../../lib/cube-parser
+      '@knives/shared':
+        specifier: workspace:^
+        version: link:../../shared
       vue:
         specifier: ^3.5.12
         version: 3.5.12(typescript@5.4.5)
       vuetify:
         specifier: ^3.6.8
         version: 3.6.8(typescript@5.4.5)(vite-plugin-vuetify@2.0.3)(vue@3.5.12)
+
+  packages/shared: {}
 
 packages:
 
