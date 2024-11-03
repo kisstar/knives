@@ -20,6 +20,7 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
+      "@browser/*": ["./packages/browser/*"],
       "@app/*": ["./packages/app/*"],
       "@shared/*": ["./packages/shared/*"],
       "@cubeParser/*": ["./packages/lib/cube-parser/*"],
@@ -27,6 +28,7 @@
     }
   },
   "include": [
+    "packages/browser",
     "packages/app",
     "packages/shared",
     "packages/lib/cube-parser",
