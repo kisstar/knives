@@ -9,7 +9,7 @@ const register = () => {
       content: () => import('@cube2png/C2PContent.vue'),
     },
     meta: {
-      title: `${APP_NAME} | Cube2PNG}`,
+      title: `${APP_NAME} | Cube2PNG`,
     },
   });
 };

@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex justify-between w-full h-full px-6 border-b border-slate-900/10 dark:border-slate-50/[0.06]"
-  >
+  <div class="flex justify-between w-full h-full px-6 border-b border-c-b">
     <!-- 左侧 -->
     <div class="flex items-center">
       <a class="flex items-center" href="/">

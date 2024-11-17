@@ -4,7 +4,15 @@ export default {
   // darkMode: ['variant', '&:not(.light *)'],
   darkMode: 'selector',
   theme: {
-    extend: {},
+    extend: {
+      opacity: {
+        hover:
+          'calc(var(--v-hover-opacity) * var(--v-theme-overlay-multiplier))',
+      },
+      colors: {
+        'c-b': 'rgba(var(--v-border-color), var(--v-border-opacity))',
+      },
+    },
   },
   plugins: [],
 };
