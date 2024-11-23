@@ -1,3 +1,8 @@
 import { createVuetify } from 'vuetify';
+import { VTreeview } from 'vuetify/labs/VTreeview';
 
-export default createVuetify();
+export default createVuetify({
+  components: {
+    VTreeview,
+  },
+});
