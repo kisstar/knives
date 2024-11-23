@@ -5,6 +5,7 @@
   "type": "module",
   "dependencies": {
     "@knives/cube2png": "workspace:^",
+    "@knives/hosts": "workspace:^",
     "@knives/shared": "workspace:^",
     "@vueuse/core": "^11.1.0",
     "lodash-es": "^4.17.21",

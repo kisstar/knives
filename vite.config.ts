@@ -6,6 +6,7 @@ import vuetify from 'vite-plugin-vuetify';
 const dirMap = {
   '@app': './packages/app',
   '@cube2png': './packages/modules/cube2png',
+  '@hosts': './packages/modules/hosts',
   '@cubeParser': './packages/lib/cube-parser',
   '@shared': './packages/shared',
   '@browser': './packages/browser',

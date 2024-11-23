@@ -3,6 +3,7 @@ import { createPinia } from 'pinia';
 import vuetify from '@app/plugins/vuetify';
 import { router } from '@app/router';
 import '@knives/cube2png';
+import '@knives/hosts';
 import App from '@app/App.vue';
 import '@app/styles/index.scss';
 

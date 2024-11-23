@@ -107,6 +107,9 @@ importers:
       '@knives/cube2png':
         specifier: workspace:^
         version: link:../modules/cube2png
+      '@knives/hosts':
+        specifier: workspace:^
+        version: link:../modules/hosts
       '@knives/shared':
         specifier: workspace:^
         version: link:../shared
@@ -151,6 +154,18 @@ importers:
       vuetify:
         specifier: ^3.6.8
         version: 3.6.8(typescript@5.4.5)(vite-plugin-vuetify@2.0.3)(vue@3.5.12)
+
+  packages/modules/hosts:
+    dependencies:
+      '@knives/shared':
+        specifier: workspace:^
+        version: link:../../shared
+      vue:
+        specifier: ^3.5.12
+        version: 3.5.12(typescript@5.4.5)
+      vuetify:
+        specifier: ^3.6.8
+        version: 3.7.3(typescript@5.4.5)(vite-plugin-vuetify@2.0.3)(vue@3.5.12)
 
   packages/shared: {}
 

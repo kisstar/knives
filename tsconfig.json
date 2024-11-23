@@ -24,6 +24,7 @@
       "@app/*": ["./packages/app/*"],
       "@shared/*": ["./packages/shared/*"],
       "@cubeParser/*": ["./packages/lib/cube-parser/*"],
+      "@hosts/*": ["./packages/modules/hosts/*"],
       "@cube2png/*": ["./packages/modules/cube2png/*"]
     }
   },
@@ -32,6 +33,7 @@
     "packages/app",
     "packages/shared",
     "packages/lib/cube-parser",
-    "packages/modules/cube2png"
+    "packages/modules/cube2png",
+    "packages/modules/hosts"
   ]
 }
