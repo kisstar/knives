@@ -27,6 +27,17 @@ export default defineConfig(() => {
     resolve: {
       alias: dirAlias,
     },
+    // prevent vite from obscuring rust errors
+    clearScreen: false,
+    server: {
+      // Tauri expects a fixed port, fail if that port is not available
+      strictPort: true,
+      // if the host Tauri is expecting is set, use it
+      host: false,
+      port: 5173,
+    },
+    // Env variables starting with the item of `envPrefix` will be exposed in tauri's source code through `import.meta.env`.
+    envPrefix: ['VITE_', 'TAURI_ENV_*'],
     plugins: [
       vue(),
       vuetify({
@@ -43,6 +54,11 @@ export default defineConfig(() => {
       }),
     ],
     build: {
+      // Tauri uses Chromium on Windows and WebKit on macOS and Linux
+      target:
+        process.env.TAURI_ENV_PLATFORM == 'windows' ? 'chrome105' : 'safari13',
+      // produce sourcemaps for debug builds
+      sourcemap: !!process.env.TAURI_ENV_DEBUG,
       outDir: '../../dist',
     },
   };

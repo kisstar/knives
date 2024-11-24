@@ -4,5 +4,15 @@
   "editor.codeActionsOnSave": ["source.fixAll"],
   "eslint.validate": ["javascript", "vue"],
   "stylelint.validate": ["vue", "scss"],
-  "cSpell.words": ["composables", "lerp", "pinia", "vuetify", "vueuse"]
+  "cSpell.words": [
+    "composables",
+    "lerp",
+    "pinia",
+    "vuetify",
+    "vueuse",
+    "tauri"
+  ],
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  }
 }
