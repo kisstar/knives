@@ -4,5 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "main": "./main.ts",
-  "module": "./main.ts"
+  "module": "./main.ts",
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  }
 }

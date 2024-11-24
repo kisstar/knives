@@ -7,7 +7,7 @@
           v-bind="props"
           @click="handleAddHostItem"
         >
-          添加配置项
+          {{ t('add_conf_item') }}
         </v-btn>
       </template>
 
@@ -29,8 +29,14 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 import { type ToolbarMenuItem, TOOLBAR_MENU } from '@hosts/constants';
+
 const emits = defineEmits(['add-host-item', 'add-host-group']);
+const { t } = useI18n({
+  inheritLocale: true,
+  useScope: 'local',
+});
 
 const handleAddHostItem = () => {
   emits('add-host-item');
@@ -49,3 +55,10 @@ const handleItemClick = (item: ToolbarMenuItem) => {
   }
 };
 </script>
+
+<i18n lang="yaml">
+en:
+  add_conf_item: 'New configuration'
+zhHans:
+  add_conf_item: '添加配置项'
+</i18n>
