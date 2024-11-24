@@ -1,28 +1,20 @@
-import { ref } from 'vue';
+import { computed } from 'vue';
 import { defineStore } from 'pinia';
-import { useTheme } from 'vuetify';
-import { APP_THEME_KEY } from '@app/constants';
-
-export type Theme = 'light' | 'dark';
-
-export const allThemes: Theme[] = ['light', 'dark'];
+import { useLocaleStore, useThemeStore } from '@app/store/config/index';
 
 export const useAppConfigStore = defineStore('appConfig', () => {
-  const theme = ref<Theme>('light');
-  const vuetifyTheme = useTheme();
+  const themeStore = useThemeStore();
+  const localeStore = useLocaleStore();
 
-  function setTheme(newTheme: Theme) {
-    vuetifyTheme.global.name.value = newTheme;
-    document.documentElement.classList.remove(theme.value);
-    document.documentElement.classList.add(newTheme);
-    theme.value = newTheme;
-    localStorage.setItem(APP_THEME_KEY, newTheme);
-  }
+  const theme = computed(() => themeStore.theme);
+  const locale = computed(() => localeStore.locale);
 
   return {
-    // state
+    // getters
     theme,
+    locale,
     // actions
-    setTheme,
+    setTheme: themeStore.setTheme,
+    setLocale: localeStore.setLocale,
   };
 });

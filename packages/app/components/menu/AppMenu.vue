@@ -38,12 +38,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useAppConfigStore, useLocaleStore } from '@app/store';
+import { useAppConfigStore } from '@app/store';
 import { type LocaleType } from '@app/store';
 import AppLocale from '@app/components/menu/components/AppLocale.vue';
 
 const appConfigStore = useAppConfigStore();
-const localeStore = useLocaleStore();
 
 function toggleTheme() {
   const theme = appConfigStore.theme;
@@ -56,6 +55,6 @@ function toggleTheme() {
 }
 
 function handleToggleLocale(value: LocaleType) {
-  localeStore.setLocale(value);
+  appConfigStore.setLocale(value);
 }
 </script>
