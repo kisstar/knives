@@ -1,0 +1,1 @@
+export const HOSTS_CONTENT_KEY = 'K_HOSTS_CONTENT';

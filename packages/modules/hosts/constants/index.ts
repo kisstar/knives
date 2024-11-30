@@ -9,3 +9,5 @@ export {
 } from '@hosts/constants/hosts';
 
 export { type ToolbarMenuItem, TOOLBAR_MENU } from '@hosts/constants/toolbar';
+
+export { HOSTS_CONTENT_KEY } from '@hosts/constants/store';

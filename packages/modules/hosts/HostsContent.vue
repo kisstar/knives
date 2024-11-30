@@ -1,7 +1,7 @@
 <template>
   <h-toolbar
-    @add-host-group="handleAddHostGroup"
-    @add-host-item="handleAddHostItem"
+    @add-host-group="handleClickAddHostGroup"
+    @add-host-item="handleClickAddHostItem"
   ></h-toolbar>
   <v-treeview
     v-model:selected="selectedHosts"
@@ -16,34 +16,53 @@
     indeterminate-icon="mdi-bookmark-minus"
     @update:selected="onSelect"
   ></v-treeview>
+  <!-- 添加配置弹窗 -->
+  <h-conf-form
+    v-model="showDialog"
+    @add-host-group="handleAddHostGroup"
+    @add-host-item="handleAddHostItem"
+  ></h-conf-form>
 </template>
 
-<script setup>
-import { onMounted, ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useHostsStore } from '@hosts/store';
 import HToolbar from '@hosts/components/HToolbar.vue';
-import {
-  DEFAULT_MAC_HOST_CONTENT,
-  DEFAULT_MAC_SELECTED_HOSTS,
-} from '@hosts/constants';
+import HConfForm from '@hosts/components/HConfForm.vue';
 
-const userHosts = null;
-const userSelectedHosts = null;
-const hosts = ref(userHosts || DEFAULT_MAC_HOST_CONTENT);
-const selectedHosts = ref(userSelectedHosts || DEFAULT_MAC_SELECTED_HOSTS);
+const { hosts, selectedHosts } = useHostsStore();
+// 添加弹窗
+const showDialog = ref(false);
+const addType = ref<'conf' | 'group'>('conf');
 
-const handleAddHostGroup = () => {
+function handleClickAddHostGroup() {
+  addType.value = 'group';
+  showDialog.value = true;
+}
+
+function handleClickAddHostItem() {
+  addType.value = 'conf';
+  showDialog.value = true;
+}
+
+/**
+ * 添加分组，并存储最新的用户配置
+ */
+function handleAddHostGroup() {
   console.log('添加分组，并存储最新的用户配置');
-};
+}
 
-const handleAddHostItem = () => {
-  console.log('添加配置项，并存储最新的用户配置');
-};
+/**
+ * 添加配置，并存储最新的用户配置
+ */
+function handleAddHostItem() {
+  console.log('添加配置，并存储最新的用户配置');
+}
 
+/**
+ * 存储最新的用户配置
+ */
 const onSelect = () => {
-  console.log('存储最新的用户配置', hosts.value, selectedHosts.value);
+  console.log('存储最新的用户配置');
 };
-
-onMounted(() => {
-  console.log('获取用户配置更新到局部变量中');
-});
 </script>

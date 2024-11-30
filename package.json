@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:tauri": "pnpm tauri dev",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "commit": "git-cz"
