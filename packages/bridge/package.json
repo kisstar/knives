@@ -1,0 +1,8 @@
+{
+  "name": "@knives/bridge",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./main.ts",
+  "module": "./main.ts"
+}

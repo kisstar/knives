@@ -1,6 +1,7 @@
 packages:
   - 'packages/app'
   - 'packages/browser'
+  - 'packages/bridge'
   - 'packages/shared'
   - 'packages/lib/*'
   - 'packages/modules/*'

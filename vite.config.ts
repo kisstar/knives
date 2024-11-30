@@ -11,6 +11,7 @@ const dirMap = {
   '@cubeParser': './packages/lib/cube-parser',
   '@shared': './packages/shared',
   '@browser': './packages/browser',
+  '@bridge': './packages/bridge',
 };
 const dirAlias = Object.keys(dirMap).reduce((acc, key) => {
   acc[key] = fileURLToPath(new URL(`${dirMap[key]}`, import.meta.url));
