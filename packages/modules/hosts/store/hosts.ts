@@ -23,11 +23,38 @@ export const useHostsStore = defineStore('hosts', () => {
     const id = uuid();
 
     hosts.value.push({
-      id,
       hostType: 'group',
+      id,
+      name: group.host,
       host: group.host,
       address: '',
       children: [],
+    });
+
+    if (active) {
+      selectedHosts.value.push(id);
+    }
+  };
+  const addHost = (
+    groupId: string,
+    hostInfo: Pick<HostInfo, 'host' | 'address' | 'name'>,
+    active: boolean,
+  ) => {
+    const id = uuid();
+    const group = hosts.value.find((item) => item.id === groupId);
+
+    if (!group) {
+      // error log
+      return;
+    }
+
+    group.children ??= [];
+    group.children.push({
+      hostType: 'item',
+      id,
+      name: hostInfo.name,
+      host: hostInfo.host,
+      address: hostInfo.address,
     });
 
     if (active) {
@@ -41,5 +68,6 @@ export const useHostsStore = defineStore('hosts', () => {
     hosts,
     // actions
     addGround,
+    addHost,
   };
 });

@@ -1,8 +1,9 @@
 export type HostType = 'item' | 'group';
 
 export interface HostInfo {
-  id: string;
   hostType: HostType;
+  id: string;
+  name: string;
   host: string;
   address: string;
   children?: HostInfo[];
@@ -40,28 +41,38 @@ export const DEFAULT_WIN_HOST_HEADER = `
 # ::1 localhost
 `;
 
+export const DEFAULT_MAC_HOST_CONTENT_ID =
+  '5ca2ad20-e52c-4204-ab7a-81c0c864f584';
+
+export const DEFAULT_WIN_HOST_CONTENT_ID =
+  'e90da8b7-b430-4f15-b932-0146f32690b6';
+
 export const DEFAULT_MAC_HOST_CONTENT: HostInfo[] = [
   {
-    id: '5ca2ad20-e52c-4204-ab7a-81c0c864f584',
     hostType: 'group',
+    id: DEFAULT_MAC_HOST_CONTENT_ID,
     host: 'System',
+    name: 'System',
     address: '',
     children: [
       {
-        id: '4411cd2a-dc9c-490b-a622-857d84ce2900',
         hostType: 'item',
+        id: '4411cd2a-dc9c-490b-a622-857d84ce2900',
+        name: 'localhost',
         host: 'localhost',
         address: '127.0.0.1',
       },
       {
-        id: 'ba7ae182-14c1-4bff-a38d-36dea6f0bebb',
         hostType: 'item',
+        id: 'ba7ae182-14c1-4bff-a38d-36dea6f0bebb',
+        name: 'broadcasthost',
         host: 'broadcasthost',
         address: '255.255.255.255',
       },
       {
-        id: 'af4e5bc3-2470-456b-beee-595178d94628',
         hostType: 'item',
+        id: 'af4e5bc3-2470-456b-beee-595178d94628',
+        name: 'localhost',
         host: 'localhost',
         address: '::1',
       },
@@ -69,10 +80,17 @@ export const DEFAULT_MAC_HOST_CONTENT: HostInfo[] = [
   },
 ];
 
-export const DEFAULT_WIN_HOST_CONTENT: HostInfo[] = [];
-
-export const DEFAULT_MAC_SELECTED_HOSTS = [
-  '5ca2ad20-e52c-4204-ab7a-81c0c864f584',
+export const DEFAULT_WIN_HOST_CONTENT: HostInfo[] = [
+  {
+    hostType: 'group',
+    id: DEFAULT_WIN_HOST_CONTENT_ID,
+    host: 'System',
+    name: 'System',
+    address: '',
+    children: [],
+  },
 ];
 
-export const DEFAULT_WIN_SELECTED_HOSTS = [];
+export const DEFAULT_MAC_SELECTED_HOSTS = [DEFAULT_MAC_HOST_CONTENT_ID];
+
+export const DEFAULT_WIN_SELECTED_HOSTS = [DEFAULT_WIN_HOST_CONTENT_ID];
