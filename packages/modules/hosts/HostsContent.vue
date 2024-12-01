@@ -1,13 +1,10 @@
 <template>
-  <h-toolbar
-    @add-host-group="handleClickAddHostGroup"
-    @add-host-item="handleClickAddHostItem"
-  ></h-toolbar>
+  <h-toolbar @add-host-group="handleClickAddHostGroup"></h-toolbar>
   <v-treeview
     v-model:selected="selectedHosts"
     :items="hosts"
+    item-title="host"
     item-value="id"
-    item-title="name"
     return-object
     selectable
     select-strategy="classic"
@@ -19,6 +16,7 @@
   <!-- 添加配置弹窗 -->
   <h-conf-form
     v-model="showDialog"
+    :host-type="addType"
     @add-host-group="handleAddHostGroup"
     @add-host-item="handleAddHostItem"
   ></h-conf-form>
@@ -27,29 +25,37 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useHostsStore } from '@hosts/store';
+import { GenericObject } from 'vee-validate';
 import HToolbar from '@hosts/components/HToolbar.vue';
 import HConfForm from '@hosts/components/HConfForm.vue';
+import type { HostType } from '@hosts/constants';
 
-const { hosts, selectedHosts } = useHostsStore();
+const { hosts, selectedHosts, addGround } = useHostsStore();
+
 // 添加弹窗
 const showDialog = ref(false);
-const addType = ref<'conf' | 'group'>('conf');
+const addType = ref<HostType>('item');
 
 function handleClickAddHostGroup() {
   addType.value = 'group';
   showDialog.value = true;
 }
 
-function handleClickAddHostItem() {
-  addType.value = 'conf';
-  showDialog.value = true;
-}
+// function handleClickAddHostItem() {
+//   addType.value = 'conf';
+//   showDialog.value = true;
+// }
 
 /**
  * 添加分组，并存储最新的用户配置
  */
-function handleAddHostGroup() {
-  console.log('添加分组，并存储最新的用户配置');
+function handleAddHostGroup(info: GenericObject) {
+  addGround(
+    {
+      host: info.name,
+    },
+    info.enable,
+  );
 }
 
 /**

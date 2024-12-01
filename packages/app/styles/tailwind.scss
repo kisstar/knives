@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  hr {
+    // vuetify 的 v-divider 组件依赖此进行工作
+    border-color: initial;
+  }
+}

@@ -9,6 +9,7 @@
     "@knives/bridge": "workspace:^",
     "@knives/shared": "workspace:^",
     "pinia": "^2.2.2",
+    "vee-validate": "^4.14.7",
     "vue": "^3.5.12",
     "vue-i18n": "10",
     "vuetify": "^3.6.8"

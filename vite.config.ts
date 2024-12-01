@@ -51,6 +51,9 @@ export default defineConfig(() => {
           fileURLToPath(
             new URL('./packages/app/locales/lang/**', import.meta.url),
           ),
+          fileURLToPath(
+            new URL('./packages/modules/*/lang/**', import.meta.url),
+          ),
         ],
       }),
     ],

@@ -1,0 +1,5 @@
+{
+  "hosts:invalid_ip_tip": "请输入正确的IP地址。",
+  "hosts:empty_host_tip": "主机名不能为空。",
+  "hosts:empty_name_tip": "名称不能为空。"
+}

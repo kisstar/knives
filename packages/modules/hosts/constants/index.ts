@@ -1,4 +1,5 @@
 export {
+  type HostType,
   type HostInfo,
   DEFAULT_MAC_HOST_HEADER,
   DEFAULT_MAC_HOST_CONTENT,
