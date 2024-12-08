@@ -15,6 +15,22 @@
     indeterminate-icon="mdi-bookmark-minus"
     @update:selected="onSelect"
   >
+    <template #title="{ item }">
+      <template v-if="item.hostType === 'group'">
+        {{ item.name }}
+      </template>
+      <v-row v-else no-gutters>
+        <v-col>
+          {{ item.address }}
+        </v-col>
+        <v-col>
+          {{ item.host }}
+        </v-col>
+        <v-col>
+          {{ item.name }}
+        </v-col>
+      </v-row>
+    </template>
     <template #append="{ item }">
       <v-icon
         v-if="item.hostType === 'group'"
@@ -22,6 +38,9 @@
         @click.stop="handleClickAddHostItem(item)"
       >
         mdi-plus
+      </v-icon>
+      <v-icon v-if="!isSystemHostGroup(item.id)" @click.stop="handleEdit(item)">
+        mdi-file-edit-outline
       </v-icon>
       <v-icon
         v-if="!isSystemHostGroup(item.id)"
@@ -36,14 +55,19 @@
   <!-- 添加配置弹窗 -->
   <h-conf-form
     v-model="showDialog"
-    :host-type="addType"
+    :host-type="hostType"
+    :form-type="formType"
+    :host-info="currentHost && formType === 'modify' ? currentHost : undefined"
     @add-host-group="handleAddHostGroup"
     @add-host-item="handleAddHostItem"
+    @modify-host-item="handleUpdate"
+    @modify-host-group="handleUpdate"
   ></h-conf-form>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useHostsStore } from '@hosts/store';
 import { GenericObject } from 'vee-validate';
@@ -56,31 +80,43 @@ const { t } = useI18n({
   inheritLocale: true,
   useScope: 'local',
 });
-const { hosts, selectedHosts, addGround, addHost } = useHostsStore();
+const hostsStore = useHostsStore();
+const { addGroup, addHostItem, removeHost, updateHost } = hostsStore;
+const { hosts, selectedHosts } = storeToRefs(hostsStore);
 
 // 添加弹窗
 const showDialog = ref(false);
-const addType = ref<HostType>('item');
-const currentGroup = ref<HostInfo | null>(null);
+const hostType = ref<HostType>('item');
+const formType = ref<'add' | 'modify'>('add');
+const currentHost = ref<HostInfo | null>(null);
 
 function handleClickAddHostGroup() {
-  addType.value = 'group';
+  formType.value = 'add';
+  hostType.value = 'group';
   showDialog.value = true;
 }
 
 function handleClickAddHostItem(item: HostInfo) {
-  currentGroup.value = item;
-  addType.value = 'item';
+  currentHost.value = item;
+  formType.value = 'add';
+  hostType.value = 'item';
   showDialog.value = true;
 }
+
+const handleEdit = (item: HostInfo) => {
+  formType.value = 'modify';
+  hostType.value = item.hostType;
+  currentHost.value = item;
+  showDialog.value = true;
+};
 
 /**
  * 添加分组，并存储最新的用户配置
  */
 function handleAddHostGroup(info: GenericObject) {
-  addGround(
+  addGroup(
     {
-      host: info.name,
+      name: info.name,
     },
     info.enable,
   );
@@ -91,11 +127,11 @@ function handleAddHostGroup(info: GenericObject) {
  * 添加配置，并存储最新的用户配置
  */
 function handleAddHostItem(info: GenericObject) {
-  addHost(
-    currentGroup.value?.id || '',
+  addHostItem(
+    currentHost.value?.id || '',
     {
       name: info.name,
-      host: info.name,
+      host: info.host,
       address: info.address,
     },
     info.enable,
@@ -104,7 +140,22 @@ function handleAddHostItem(info: GenericObject) {
 }
 
 const handleDelete = (item: HostInfo) => {
-  console.log('删除', item);
+  removeHost(item);
+};
+
+const handleUpdate = (info: GenericObject) => {
+  if (currentHost.value) {
+    updateHost(
+      currentHost.value,
+      {
+        name: info.name,
+        host: info.host,
+        address: info.address,
+      },
+      info.enable,
+    );
+  }
+  showDialog.value = false;
 };
 
 /**

@@ -3,6 +3,7 @@ export type HostType = 'item' | 'group';
 export interface HostInfo {
   hostType: HostType;
   id: string;
+  groupId?: string;
   name: string;
   host: string;
   address: string;
@@ -58,6 +59,7 @@ export const DEFAULT_MAC_HOST_CONTENT: HostInfo[] = [
       {
         hostType: 'item',
         id: '4411cd2a-dc9c-490b-a622-857d84ce2900',
+        groupId: DEFAULT_MAC_HOST_CONTENT_ID,
         name: 'localhost',
         host: 'localhost',
         address: '127.0.0.1',
@@ -65,6 +67,7 @@ export const DEFAULT_MAC_HOST_CONTENT: HostInfo[] = [
       {
         hostType: 'item',
         id: 'ba7ae182-14c1-4bff-a38d-36dea6f0bebb',
+        groupId: DEFAULT_MAC_HOST_CONTENT_ID,
         name: 'broadcasthost',
         host: 'broadcasthost',
         address: '255.255.255.255',
@@ -72,6 +75,7 @@ export const DEFAULT_MAC_HOST_CONTENT: HostInfo[] = [
       {
         hostType: 'item',
         id: 'af4e5bc3-2470-456b-beee-595178d94628',
+        groupId: DEFAULT_MAC_HOST_CONTENT_ID,
         name: 'localhost',
         host: 'localhost',
         address: '::1',

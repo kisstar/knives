@@ -1,11 +1,14 @@
 import { computed } from 'vue';
+import { useForm } from 'vee-validate';
 import { isIP } from '@knives/shared';
 import { i18n } from '@app/egress';
-import type { HostType } from '@hosts/constants';
+import type { HConfFormProps } from '@hosts/components/HConfForm.vue';
 
 const { t } = i18n.global;
 
-export const getFormFieldInfo = (hostTypeGetter: () => HostType) => {
+export const getFormFieldInfo = (
+  options: HConfFormProps,
+): Parameters<typeof useForm>[0] => {
   const commonFieldInfo = {
     name(value?: string) {
       if (value?.length) return true;
@@ -31,9 +34,9 @@ export const getFormFieldInfo = (hostTypeGetter: () => HostType) => {
     },
   };
 
-  const formFieldInfo = {
+  return {
     validationSchema: computed(() => {
-      if (hostTypeGetter() === 'item') {
+      if (options.hostType === 'item') {
         return {
           ...commonFieldInfo,
           ...itemExtraFieldInfo,
@@ -43,6 +46,4 @@ export const getFormFieldInfo = (hostTypeGetter: () => HostType) => {
       return commonFieldInfo;
     }),
   };
-
-  return formFieldInfo;
 };
