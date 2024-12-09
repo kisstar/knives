@@ -1,0 +1,19 @@
+@use 'sass:math';
+
+@function vh($px) {
+  @return math.div($px, 844) * 100vh;
+}
+
+@function vw($px) {
+  @return math.div($px, 390) * 100vw;
+}
+
+@mixin attr2VH($attr, $px) {
+  #{$attr}: $px + px;
+  #{$attr}: vh($px);
+}
+
+@mixin attr2VW($attr, $px) {
+  #{$attr}: $px + px;
+  #{$attr}: vw($px);
+}

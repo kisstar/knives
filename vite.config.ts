@@ -28,6 +28,17 @@ export default defineConfig(() => {
     resolve: {
       alias: dirAlias,
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+          additionalData: `
+            @use '@app/styles/mixin/bem/bem-mixin.scss' as *;
+            @use '@app/styles/mixin/rem.scss' as *;
+            @use '@app/styles/mixin/utils.scss' as *;`,
+        },
+      },
+    },
     // prevent vite from obscuring rust errors
     clearScreen: false,
     server: {
