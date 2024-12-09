@@ -6,6 +6,7 @@
   "main": "./main.ts",
   "module": "./main.ts",
   "dependencies": {
-    "@tauri-apps/plugin-store": "~2"
+    "@tauri-apps/plugin-store": "~2",
+    "localforage": "^1.10.0"
   }
 }

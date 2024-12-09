@@ -7,10 +7,11 @@
   "cSpell.words": [
     "composables",
     "lerp",
+    "persistences",
     "pinia",
+    "tauri",
     "vuetify",
-    "vueuse",
-    "tauri"
+    "vueuse"
   ],
   "[toml]": {
     "editor.defaultFormatter": "tamasfe.even-better-toml"

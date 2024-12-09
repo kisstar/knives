@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "dependencies": {
+    "@knives/bridge": "workspace:^",
     "@knives/cube2png": "workspace:^",
     "@knives/hosts": "workspace:^",
     "@knives/shared": "workspace:^",

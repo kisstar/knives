@@ -1,1 +1,1 @@
-export { store } from '@bridge/store';
+export { store, createStore, type Store } from '@bridge/store';
