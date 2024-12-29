@@ -26,6 +26,7 @@
       "@shared/*": ["./packages/shared/*"],
       "@cubeParser/*": ["./packages/lib/cube-parser/*"],
       "@hosts/*": ["./packages/modules/hosts/*"],
+      "@m3u8-downloader/*": ["./packages/modules/m3u8-downloader/*"],
       "@cube2png/*": ["./packages/modules/cube2png/*"]
     }
   },
@@ -36,6 +37,7 @@
     "packages/shared",
     "packages/lib/cube-parser",
     "packages/modules/cube2png",
+    "packages/modules/m3u8-downloader",
     "packages/modules/hosts"
   ]
 }

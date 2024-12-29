@@ -6,6 +6,7 @@
   "dependencies": {
     "@knives/bridge": "workspace:^",
     "@knives/cube2png": "workspace:^",
+    "@knives/m3u8-downloader": "workspace:^",
     "@knives/hosts": "workspace:^",
     "@knives/shared": "workspace:^",
     "@vueuse/core": "^11.1.0",

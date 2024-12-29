@@ -1,0 +1,12 @@
+{
+  "name": "@knives/m3u8-downloader",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./main.ts",
+  "module": "./main.ts",
+  "dependencies": {
+    "vue": "^3.5.12",
+    "vuetify": "^3.6.8"
+  }
+}

@@ -6,6 +6,7 @@ import { i18n } from '@app/locales';
 import App from '@app/App.vue';
 import '@knives/cube2png';
 import '@knives/hosts';
+import '@knives/m3u8-downloader';
 import '@app/styles/index.scss';
 
 const pinia = createPinia();

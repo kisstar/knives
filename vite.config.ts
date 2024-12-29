@@ -8,6 +8,7 @@ const dirMap = {
   '@app': './packages/app',
   '@cube2png': './packages/modules/cube2png',
   '@hosts': './packages/modules/hosts',
+  '@m3u8-downloader': './packages/modules/m3u8-downloader',
   '@cubeParser': './packages/lib/cube-parser',
   '@shared': './packages/shared',
   '@browser': './packages/browser',
