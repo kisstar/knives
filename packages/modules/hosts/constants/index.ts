@@ -15,4 +15,4 @@ export {
 
 export { type ToolbarMenuItem, TOOLBAR_MENU } from '@hosts/constants/toolbar';
 
-export { HOSTS_CONTENT_KEY } from '@hosts/constants/store';
+export { HOSTS_STORE_NAME, HOSTS_CONTENT_KEY } from '@hosts/constants/store';
