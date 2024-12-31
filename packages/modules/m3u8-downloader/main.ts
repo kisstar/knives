@@ -2,7 +2,7 @@ import { APP_NAME, AppMenu, router } from '@app/egress';
 
 const register = () => {
   router.addRoute('tools', {
-    path: 'm3u8-downloader',
+    path: 'm3u8/downloader',
     name: 'm3u8-downloader',
     components: {
       headerBar: () => AppMenu,

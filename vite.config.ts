@@ -40,9 +40,16 @@ export default defineConfig(() => {
         },
       },
     },
+    optimizeDeps: {
+      exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util'],
+    },
     // prevent vite from obscuring rust errors
     clearScreen: false,
     server: {
+      headers: {
+        'Cross-Origin-Opener-Policy': 'same-origin',
+        'Cross-Origin-Embedder-Policy': 'require-corp',
+      },
       // Tauri expects a fixed port, fail if that port is not available
       strictPort: true,
       // if the host Tauri is expecting is set, use it
