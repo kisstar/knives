@@ -9,6 +9,7 @@
     "lerp",
     "persistences",
     "pinia",
+    "println",
     "tauri",
     "vuetify",
     "vueuse"
