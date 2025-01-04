@@ -153,6 +153,9 @@ importers:
 
   packages/bridge:
     dependencies:
+      '@tauri-apps/api':
+        specifier: ^2.1.1
+        version: 2.1.1
       '@tauri-apps/plugin-store':
         specifier: ~2
         version: 2.1.0
