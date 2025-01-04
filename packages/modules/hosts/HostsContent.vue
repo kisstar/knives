@@ -65,6 +65,7 @@
 </template>
 
 <script setup lang="ts">
+import { debounce } from 'lodash-es';
 import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
@@ -114,12 +115,9 @@ const handleEdit = (item: HostInfo) => {
  * 添加分组，并存储最新的用户配置
  */
 function handleAddHostGroup(info: GenericObject) {
-  addGroup(
-    {
-      name: info.name,
-    },
-    info.enable,
-  );
+  addGroup({
+    name: info.name,
+  });
   showDialog.value = false;
 }
 
@@ -158,6 +156,8 @@ const handleUpdate = (info: GenericObject) => {
   showDialog.value = false;
 };
 
+const debouncedSetHostsContent = debounce(setHostsContent, 500);
+
 /**
  * 存储最新的用户配置
  */
@@ -169,7 +169,7 @@ watch(
       hostsStore.selectedHostsMap,
     );
 
-    setHostsContent(content);
+    debouncedSetHostsContent(content);
   },
 );
 </script>

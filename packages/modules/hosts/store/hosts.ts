@@ -18,7 +18,7 @@ export const useHostsStore = defineStore(
       return new Map(selectedHosts.value.map((id) => [id, true]));
     });
 
-    const addGroup = (group: Pick<HostInfo, 'name'>, active: boolean) => {
+    const addGroup = (group: Pick<HostInfo, 'name'>) => {
       const id = uuid();
 
       hosts.value.push({
@@ -29,10 +29,6 @@ export const useHostsStore = defineStore(
         address: '',
         children: [],
       });
-
-      if (active) {
-        selectedHosts.value.push(id);
-      }
     };
     const addHostItem = (
       groupId: string,

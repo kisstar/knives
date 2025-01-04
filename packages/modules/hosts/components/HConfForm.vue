@@ -27,6 +27,7 @@
           ></v-text-field>
 
           <v-checkbox
+            v-if="hostType === 'item'"
             v-model="enable"
             v-bind="enableAttrs"
             :label="t('enable')"
