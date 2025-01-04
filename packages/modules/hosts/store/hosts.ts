@@ -112,6 +112,8 @@ export const useHostsStore = defineStore(
       // state
       selectedHosts,
       hosts,
+      // getters
+      selectedHostsMap,
       // actions
       addGroup,
       addHostItem,

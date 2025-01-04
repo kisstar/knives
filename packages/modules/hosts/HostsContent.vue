@@ -13,7 +13,6 @@
     false-icon="mdi-bookmark-outline"
     true-icon="mdi-bookmark"
     indeterminate-icon="mdi-bookmark-minus"
-    @update:selected="onSelect"
   >
     <template #title="{ item }">
       <template v-if="item.hostType === 'group'">
@@ -66,14 +65,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { useHostsStore } from '@hosts/store';
 import { GenericObject } from 'vee-validate';
 import HToolbar from '@hosts/components/HToolbar.vue';
 import HConfForm from '@hosts/components/HConfForm.vue';
-import { isSystemHostGroup } from '@hosts/utils';
+import { isSystemHostGroup, getHostsContent } from '@hosts/utils';
+import { setHostsContent } from '@hosts/invokers';
 import type { HostType, HostInfo } from '@hosts/constants';
 
 const { t } = useI18n({
@@ -161,9 +161,17 @@ const handleUpdate = (info: GenericObject) => {
 /**
  * 存储最新的用户配置
  */
-const onSelect = () => {
-  console.log('存储最新的用户配置');
-};
+watch(
+  () => hostsStore.$state.selectedHosts.length,
+  () => {
+    const content = getHostsContent(
+      hostsStore.hosts,
+      hostsStore.selectedHostsMap,
+    );
+
+    setHostsContent(content);
+  },
+);
 </script>
 
 <i18n lang="yaml">
