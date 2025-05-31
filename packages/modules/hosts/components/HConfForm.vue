@@ -54,12 +54,13 @@ import { computed, watch } from 'vue';
 import { useForm } from 'vee-validate';
 import { useI18n } from 'vue-i18n';
 import { useHostsStore } from '@hosts/store';
-import { getFormFieldInfo } from '@hosts/components/form';
+import { useFormFieldInfo } from '@hosts/components/form';
 import type { HostType, HostInfo } from '@hosts/constants';
+import type { FormType } from '@hosts/types';
 
 export interface HConfFormProps {
   hostType: HostType;
-  formType: 'add' | 'modify';
+  formType: FormType;
   hostInfo?: HostInfo;
 }
 
@@ -78,7 +79,7 @@ const { t } = useI18n({
   useScope: 'local',
 });
 const { errors, defineField, handleSubmit, resetForm, setValues } = useForm(
-  getFormFieldInfo(props),
+  useFormFieldInfo(props),
 );
 const [address, addressAttrs] = defineField('address');
 const [host, hostAttrs] = defineField('host');

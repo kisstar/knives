@@ -32,17 +32,17 @@
     </template>
     <template #append="{ item }">
       <v-icon
-        v-if="item.hostType === 'group'"
+        v-if="item.hostType === 'group' && !isSystemHost(item)"
         :title="t('add_conf_item')"
         @click.stop="handleClickAddHostItem(item)"
       >
         mdi-plus
       </v-icon>
-      <v-icon v-if="!isSystemHostGroup(item.id)" @click.stop="handleEdit(item)">
+      <v-icon v-if="!isSystemHost(item)" @click.stop="handleEdit(item)">
         mdi-file-edit-outline
       </v-icon>
       <v-icon
-        v-if="!isSystemHostGroup(item.id)"
+        v-if="!isSystemHost(item)"
         class="ml-1"
         :title="t('delete')"
         @click.stop="handleDelete(item)"
@@ -73,9 +73,10 @@ import { useHostsStore } from '@hosts/store';
 import { GenericObject } from 'vee-validate';
 import HToolbar from '@hosts/components/HToolbar.vue';
 import HConfForm from '@hosts/components/HConfForm.vue';
-import { isSystemHostGroup, getHostsContent } from '@hosts/utils';
+import { isSystemHost, getHostsContent } from '@hosts/utils';
 import { setHostsContent } from '@hosts/invokers';
 import type { HostType, HostInfo } from '@hosts/constants';
+import type { FormType } from '@hosts/types';
 
 const { t } = useI18n({
   inheritLocale: true,
@@ -88,7 +89,7 @@ const { hosts, selectedHosts } = storeToRefs(hostsStore);
 // 添加弹窗
 const showDialog = ref(false);
 const hostType = ref<HostType>('item');
-const formType = ref<'add' | 'modify'>('add');
+const formType = ref<FormType>('add');
 const currentHost = ref<HostInfo | null>(null);
 
 function handleClickAddHostGroup() {

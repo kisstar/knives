@@ -1,5 +1,6 @@
 {
   "hosts:invalid_ip_tip": "Please enter the correct IP address.",
   "hosts:empty_host_tip": "Host name cannot be empty.",
+  "hosts:invalid_host_tip": "Please enter the correct host name.",
   "hosts:empty_name_tip": "The name cannot be empty."
 }

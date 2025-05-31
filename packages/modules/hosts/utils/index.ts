@@ -1,1 +1,1 @@
-export { isSystemHostGroup, getHostsContent } from '@hosts/utils/hosts';
+export { isSystemHost, getHostsContent } from '@hosts/utils/hosts';

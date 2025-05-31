@@ -1,1 +1,1 @@
-export { getFormFieldInfo } from '@hosts/components/form/options';
+export { useFormFieldInfo } from '@hosts/components/form/options';
