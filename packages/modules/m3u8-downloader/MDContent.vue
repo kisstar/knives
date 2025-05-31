@@ -1,25 +1,30 @@
 <template>
-  <div class="flex justify-between items-center px-4 pt-4">
-    <div class="w-8/12">
-      <v-text-field
-        :placeholder="t('download_placeholder')"
-        :messages="message"
-      ></v-text-field>
+  <div class="px-4 pt-4">
+    <div class="flex justify-between items-center">
+      <div class="w-8/12">
+        <v-text-field
+          v-model="videoURL"
+          :placeholder="t('download_placeholder')"
+          :messages="message"
+        ></v-text-field>
+      </div>
+      <v-btn-group variant="outlined" divided>
+        <v-btn @click="transcode">{{ t('download') }}</v-btn>
+      </v-btn-group>
     </div>
-    <v-btn-group variant="outlined" divided>
-      <v-btn @click="transcode">{{ t('download') }}</v-btn>
-    </v-btn-group>
+    <video v-if="video" class="pt-2" :src="video" controls></video>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
-import { BASE_URL } from '@m3u8-downloader/constants';
-
-const ffmpeg = new FFmpeg();
+import { downloadBlob } from '@knives/shared';
+import {
+  ffmpeg,
+  loadFFmpegPromise,
+  downloadM3u8,
+} from '@m3u8-downloader/utils';
 
 const { t } = useI18n({
   inheritLocale: true,
@@ -35,40 +40,25 @@ async function transcode() {
   ffmpeg.on('log', ({ message: msg }) => {
     message.value = msg;
   });
-
-  await ffmpeg.load({
-    coreURL: await toBlobURL(`${BASE_URL}/ffmpeg-core.js`, 'text/javascript'),
-    wasmURL: await toBlobURL(
-      `${BASE_URL}/ffmpeg-core.wasm`,
-      'application/wasm',
-    ),
-    workerURL: await toBlobURL(
-      `${BASE_URL}/ffmpeg-core.worker.js`,
-      'text/javascript',
-    ),
-  });
+  await loadFFmpegPromise;
 
   message.value = 'Start transcoding';
-  await ffmpeg.writeFile('input.m3u8', await fetchFile(videoURL.value));
-  await ffmpeg.exec([
-    '-protocol_whitelist',
-    'file,http,https,tcp,tls,crypto',
-    '-i',
-    'input.m3u8',
-    '-c',
-    'copy',
-    '-bsf:a',
-    'aac_adtstoasc',
-    'test.mp4',
-  ]);
+  const data = await downloadM3u8(videoURL.value, 'output.mp4', {
+    useConcat: true,
+  });
 
   message.value = 'Complete transcoding';
-  const data = await ffmpeg.readFile('test.mp4');
+  const blob = new Blob([(data as Uint8Array).buffer], { type: 'video/mp4' });
+  video.value = URL.createObjectURL(blob);
 
-  video.value = URL.createObjectURL(
-    new Blob([(data as Uint8Array).buffer], { type: 'video/mp4' }),
-  );
+  message.value = 'Downloading';
+  downloadBlob(blob, { filename: 'output.mp4' });
+  message.value = 'Download complete';
 }
+
+onUnmounted(() => {
+  window.URL.revokeObjectURL(video.value);
+});
 </script>
 
 <i18n lang="yaml">

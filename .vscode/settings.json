@@ -6,6 +6,7 @@
   "stylelint.validate": ["vue", "scss"],
   "cSpell.words": [
     "composables",
+    "demuxer",
     "lerp",
     "persistences",
     "pinia",
@@ -19,5 +20,8 @@
   },
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
