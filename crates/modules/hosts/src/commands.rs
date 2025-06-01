@@ -1,21 +1,63 @@
-use std::fs::File;
-use std::io::{self, Write};
-use std::path::Path;
+use knives_shared::{ResponseCode, ResponseResult};
+use std::{
+    fs::OpenOptions,
+    io::{self, Write},
+};
 
-fn save_content_to_file(content: &str, path: &Path) -> io::Result<()> {
-    // 修改文件内容
-    // 以写模式打开文件
-    let mut file = File::create(path)?;
+/// 定义 hosts 文件路径常量
+#[cfg(target_os = "windows")]
+const HOSTS_PATH: &str = "C:\\Windows\\System32\\drivers\\etc\\hosts";
 
-    // 写入新的内容
-    file.write_all(content.as_bytes())?;
-    Ok(())
-}
+#[cfg(not(target_os = "windows"))]
+const HOSTS_PATH: &str = "/etc/hosts";
 
 #[tauri::command]
-pub fn set_hosts_content(content: &str) -> Result<(), String> {
-    let path = Path::new("/etc/hosts");
+pub fn set_hosts_content(content: &str) -> Result<ResponseResult, ResponseResult> {
+    let open_result = OpenOptions::new().write(true).open(HOSTS_PATH);
+    let mut host_file = match open_result {
+        Ok(file) => file,
+        Err(err) => match err.kind() {
+            io::ErrorKind::NotFound => {
+                return Err(ResponseResult {
+                    code: ResponseCode::FileNotFound,
+                    message: "file does not exist.".to_string(),
+                });
+            }
+            io::ErrorKind::PermissionDenied => {
+                return Err(ResponseResult {
+                    code: ResponseCode::PermissionDenied,
+                    message: "permission denied.".to_string(),
+                });
+            }
+            _ => {
+                return Err(ResponseResult {
+                    code: ResponseCode::UnknownError,
+                    message: "unknown error.".to_string(),
+                });
+            }
+        },
+    };
 
-    save_content_to_file(content, path).map_err(|err| err.to_string())?;
-    Ok(())
+    // Write content to the file
+    if let Err(err) = host_file.write_all(content.as_bytes()) {
+        match err.kind() {
+            io::ErrorKind::PermissionDenied => {
+                return Err(ResponseResult {
+                    code: ResponseCode::PermissionDenied,
+                    message: "permission denied.".to_string(),
+                });
+            }
+            _ => {
+                return Err(ResponseResult {
+                    code: ResponseCode::UnknownError,
+                    message: "unknown error.".to_string(),
+                });
+            }
+        }
+    }
+
+    Ok(ResponseResult {
+        code: ResponseCode::Success,
+        message: "success".to_string(),
+    })
 }

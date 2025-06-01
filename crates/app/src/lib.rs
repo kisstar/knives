@@ -13,7 +13,7 @@ pub fn run() {
             Ok(())
         });
 
-    hosts::setup(builder)
+    knives_hosts::setup(builder)
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

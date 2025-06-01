@@ -69,8 +69,10 @@ import { debounce } from 'lodash-es';
 import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
-import { useHostsStore } from '@hosts/store';
 import { GenericObject } from 'vee-validate';
+import { useHostsStore } from '@hosts/store';
+import { ResponseCode } from '@knives/shared';
+import { message, i18n } from '@app/egress';
 import HToolbar from '@hosts/components/HToolbar.vue';
 import HConfForm from '@hosts/components/HConfForm.vue';
 import { isSystemHost, getHostsContent } from '@hosts/utils';
@@ -82,6 +84,7 @@ const { t } = useI18n({
   inheritLocale: true,
   useScope: 'local',
 });
+const { t: gt } = i18n.global;
 const hostsStore = useHostsStore();
 const { addGroup, addHostItem, removeHost, updateHost } = hostsStore;
 const { hosts, selectedHosts } = storeToRefs(hostsStore);
@@ -164,13 +167,21 @@ const debouncedSetHostsContent = debounce(setHostsContent, 500);
  */
 watch(
   () => hostsStore.$state.selectedHosts.length,
-  () => {
+  async () => {
     const content = getHostsContent(
       hostsStore.hosts,
       hostsStore.selectedHostsMap,
     );
 
-    debouncedSetHostsContent(content);
+    const result = await debouncedSetHostsContent(content);
+
+    if (result?.code === ResponseCode.Success) {
+      message.success({ message: gt('hosts:save_success') });
+    } else if (result?.code === ResponseCode.PermissionDenied) {
+      message.error({ message: gt('hosts:save_permission_denied_error') });
+    } else {
+      message.error({ message: gt('hosts:save_unknown_error') });
+    }
   },
 );
 </script>

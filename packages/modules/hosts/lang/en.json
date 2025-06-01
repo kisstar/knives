@@ -2,5 +2,8 @@
   "hosts:invalid_ip_tip": "Please enter the correct IP address.",
   "hosts:empty_host_tip": "Host name cannot be empty.",
   "hosts:invalid_host_tip": "Please enter the correct host name.",
-  "hosts:empty_name_tip": "The name cannot be empty."
+  "hosts:empty_name_tip": "The name cannot be empty.",
+  "hosts:save_success": "Saved successfully.",
+  "hosts:save_permission_denied_error": "Save failed, no permission to modify the Hosts file.",
+  "hosts:save_unknown_error": "Save failed."
 }

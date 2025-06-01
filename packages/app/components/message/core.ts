@@ -47,9 +47,7 @@ const createMessage = ({ appendTo, ...options }: MessageOptions) => {
   return { app };
 };
 
-export const message: MessageFn & Partial<Message> = (
-  options: UserMessageOptions = {},
-) => {
+const messageFn: MessageFn = (options: UserMessageOptions = {}) => {
   const { app } = createMessage({ ...messageDefaults, ...options });
   const handler = () => app._instance?.exposed?.close();
 
@@ -57,6 +55,8 @@ export const message: MessageFn & Partial<Message> = (
 
   return handler;
 };
+
+const message = messageFn as Message;
 
 messageTypes.forEach((type) => {
   message[type] = (options: UserMessageParams = {}) => {
@@ -67,3 +67,5 @@ messageTypes.forEach((type) => {
     return message({ ...options, type });
   };
 });
+
+export { message };

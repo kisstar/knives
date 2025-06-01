@@ -2,5 +2,8 @@
   "hosts:invalid_ip_tip": "请输入正确的IP地址。",
   "hosts:empty_host_tip": "主机名不能为空。",
   "hosts:invalid_host_tip": "请输入正确的主机名。",
-  "hosts:empty_name_tip": "名称不能为空。"
+  "hosts:empty_name_tip": "名称不能为空。",
+  "hosts:save_success": "保存成功。",
+  "hosts:save_permission_denied_error": "保存失败，没有修改 Hosts 文件的权限。",
+  "hosts:save_unknown_error": "保存失败。"
 }
