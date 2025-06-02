@@ -21,8 +21,8 @@ export const routes: RouteRecordRaw[] = [
         path: 'home',
         name: 'tools-home',
         components: {
-          headerBar: () => AppMenu,
-          content: () => ToolsContent,
+          headerBar: AppMenu,
+          content: ToolsContent,
         },
         meta: {
           title: `${APP_NAME} | 工具`,

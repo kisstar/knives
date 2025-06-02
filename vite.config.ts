@@ -22,10 +22,12 @@ const dirAlias = Object.keys(dirMap).reduce((acc, key) => {
 /**
  * @see https://vitejs.dev/config/
  */
-export default defineConfig(() => {
+export default defineConfig(({ mode }) => {
+  const isDev = mode === 'development';
+
   return {
     root: dirAlias['@app'],
-    base: '/knives',
+    base: isDev ? '/knives' : '/',
     resolve: {
       alias: dirAlias,
     },

@@ -8,7 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
 import type { ToolInfo } from '@app/config';
 
 interface ToolItemProps {
@@ -16,12 +15,9 @@ interface ToolItemProps {
 }
 
 const props = defineProps<ToolItemProps>();
-
-const router = useRouter();
+const emit = defineEmits<(evt: 'tool-click', value: ToolInfo) => void>();
 
 const handleToolClick = () => {
-  if (props.info.path) {
-    router.push(props.info.path);
-  }
+  emit('tool-click', props.info);
 };
 </script>
