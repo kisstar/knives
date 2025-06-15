@@ -1,0 +1,1 @@
+function c(e,t){const o=window.URL.createObjectURL(e);d(o,t),window.URL.revokeObjectURL(o)}function d(e,t){const{filename:o}=t||{filename:"unknown"},n=document.createElement("a");n.href=e,n.setAttribute("download",o||"unknown"),document.body.appendChild(n),n.click(),document.body.removeChild(n)}export{c as d};
